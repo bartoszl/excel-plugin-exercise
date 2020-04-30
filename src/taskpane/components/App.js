@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { Button, ButtonType } from "office-ui-fabric-react";
 import Progress from "./Progress";
 import { getExchangeRates } from '../helpers/endpoints';
 import CurrencyForm from './CurrencyForm';
+import Layout from './Layout';
+import { H2, H4 } from './H';
+import Error from './Error';
 
 const App = ({ title, isOfficeInitialized }) => {
   const [error, setError] = useState(null);
@@ -52,11 +54,11 @@ const App = ({ title, isOfficeInitialized }) => {
   }
 
   return (
-    <div className="ms-welcome">
-      <h2> Exchange rate worksheet creator </h2>
-      <CurrencyForm onSubmit={handleSubmit} />
-      <p styled={{ color: 'red' }}> { error } </p>
-    </div>
+    <Layout>
+      <H2> Exchange Rates </H2>
+      <H4> A simple taskpane that lets you import currency exchange rates to your workbook! </H4>
+      <CurrencyForm onSubmit={handleSubmit} error={error} />
+    </Layout>
   );
 }
 

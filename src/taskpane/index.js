@@ -7,8 +7,9 @@ import * as ReactDOM from "react-dom";
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
+import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import reducer from './rootReducer';
-/* global AppCpntainer, Component, document, Office, module, React, require */
+import theme from './theme';
 
 initializeIcons();
 
@@ -18,13 +19,22 @@ const title = "Contoso Task Pane Add-in";
 
 const store = createStore(reducer, applyMiddleware(thunk));
 
+const GlobalStyle = createGlobalStyle`
+  * {
+    font-family: 'Roboto', sans-serif;
+  }
+`
+
 const render = Component => {
   ReactDOM.render(
-    <AppContainer>
-      <Provider store={store}>
-        <App title={title} isOfficeInitialized={isOfficeInitialized} />
-      </Provider>
-    </AppContainer>,
+    <ThemeProvider theme={theme}>
+      <AppContainer>
+        <Provider store={store}>
+          <App title={title} isOfficeInitialized={isOfficeInitialized} />
+        </Provider>
+      </AppContainer>
+      <GlobalStyle />
+    </ThemeProvider>,
     document.getElementById("container")
   );
 };

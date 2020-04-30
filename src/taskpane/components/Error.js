@@ -1,0 +1,6 @@
+import styled from 'styled-components';
+
+export default styled.p`
+  color: ${({ theme }) => theme.colors.danger};
+  font-size: ${({ theme }) => theme.fontSize.sm};
+`;
